@@ -17,6 +17,7 @@
             android:id="@+id/iv_meal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:maxHeight="300dp"
             android:scaleType="fitXY"
             android:adjustViewBounds="true" />
 
@@ -49,6 +50,7 @@
                     android:textColor="@color/white" />
 
                 <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_divider"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="5dp"

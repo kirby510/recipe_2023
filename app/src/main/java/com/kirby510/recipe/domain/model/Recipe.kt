@@ -1,165 +1,71 @@
 package com.kirby510.recipe.domain.model
 
-import com.google.gson.annotations.SerializedName
+import com.kirby510.recipe.data.model.DataRecipe
 import java.io.Serializable
 
 class Recipe : Serializable {
-    @SerializedName("idMeal")
-    var idMeal: String? = null
+    constructor()
 
-    @SerializedName("strMeal")
-    var strMeal: String? = null
+    constructor(recipeResponse: RecipeResponse) {
+        id = recipeResponse.idMeal ?: ""
+        name = recipeResponse.strMeal ?: ""
+        category = recipeResponse.strCategory ?: ""
+        area = recipeResponse.strArea ?: ""
 
-    @SerializedName("strDrinkAlternate")
-    var strDrinkAlternate: String? = null
+        ingredients.clear()
 
-    @SerializedName("strCategory")
-    var strCategory: String? = null
+        if (!recipeResponse.strIngredient1.isNullOrEmpty() && !recipeResponse.strMeasure1.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient1 + " (" + recipeResponse.strMeasure1 + ")")
+        if (!recipeResponse.strIngredient2.isNullOrEmpty() && !recipeResponse.strMeasure2.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient2 + " (" + recipeResponse.strMeasure2 + ")")
+        if (!recipeResponse.strIngredient3.isNullOrEmpty() && !recipeResponse.strMeasure3.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient3 + " (" + recipeResponse.strMeasure3 + ")")
+        if (!recipeResponse.strIngredient4.isNullOrEmpty() && !recipeResponse.strMeasure4.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient4 + " (" + recipeResponse.strMeasure4 + ")")
+        if (!recipeResponse.strIngredient5.isNullOrEmpty() && !recipeResponse.strMeasure5.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient5 + " (" + recipeResponse.strMeasure5 + ")")
+        if (!recipeResponse.strIngredient6.isNullOrEmpty() && !recipeResponse.strMeasure6.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient6 + " (" + recipeResponse.strMeasure6 + ")")
+        if (!recipeResponse.strIngredient7.isNullOrEmpty() && !recipeResponse.strMeasure7.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient7 + " (" + recipeResponse.strMeasure7 + ")")
+        if (!recipeResponse.strIngredient8.isNullOrEmpty() && !recipeResponse.strMeasure8.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient8 + " (" + recipeResponse.strMeasure8 + ")")
+        if (!recipeResponse.strIngredient9.isNullOrEmpty() && !recipeResponse.strMeasure9.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient9 + " (" + recipeResponse.strMeasure9 + ")")
+        if (!recipeResponse.strIngredient10.isNullOrEmpty() && !recipeResponse.strMeasure10.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient10 + " (" + recipeResponse.strMeasure10 + ")")
+        if (!recipeResponse.strIngredient11.isNullOrEmpty() && !recipeResponse.strMeasure11.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient11 + " (" + recipeResponse.strMeasure11 + ")")
+        if (!recipeResponse.strIngredient12.isNullOrEmpty() && !recipeResponse.strMeasure12.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient12 + " (" + recipeResponse.strMeasure12 + ")")
+        if (!recipeResponse.strIngredient13.isNullOrEmpty() && !recipeResponse.strMeasure13.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient13 + " (" + recipeResponse.strMeasure13 + ")")
+        if (!recipeResponse.strIngredient14.isNullOrEmpty() && !recipeResponse.strMeasure14.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient14 + " (" + recipeResponse.strMeasure14 + ")")
+        if (!recipeResponse.strIngredient15.isNullOrEmpty() && !recipeResponse.strMeasure15.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient15 + " (" + recipeResponse.strMeasure15 + ")")
+        if (!recipeResponse.strIngredient16.isNullOrEmpty() && !recipeResponse.strMeasure16.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient16 + " (" + recipeResponse.strMeasure16 + ")")
+        if (!recipeResponse.strIngredient17.isNullOrEmpty() && !recipeResponse.strMeasure17.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient17 + " (" + recipeResponse.strMeasure17 + ")")
+        if (!recipeResponse.strIngredient18.isNullOrEmpty() && !recipeResponse.strMeasure18.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient18 + " (" + recipeResponse.strMeasure18 + ")")
+        if (!recipeResponse.strIngredient19.isNullOrEmpty() && !recipeResponse.strMeasure19.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient19 + " (" + recipeResponse.strMeasure19 + ")")
+        if (!recipeResponse.strIngredient20.isNullOrEmpty() && !recipeResponse.strMeasure20.isNullOrEmpty()) ingredients.add(recipeResponse.strIngredient20 + " (" + recipeResponse.strMeasure20 + ")")
 
-    @SerializedName("strArea")
-    var strArea: String? = null
+        instructions = recipeResponse.strInstructions?.split("\\r\\n")?.toMutableList() ?: mutableListOf()
+        imageUrl = recipeResponse.strMealThumb ?: ""
+    }
 
-    @SerializedName("strInstructions")
-    var strInstructions: String? = null
+    constructor(dataRecipe: DataRecipe) {
+        id = dataRecipe.recipeId
+        name = dataRecipe.name
+        category = dataRecipe.category
+        area = dataRecipe.area
+        ingredients = dataRecipe.ingredients
+        instructions = dataRecipe.instructions
+        imageUrl = dataRecipe.imageUrl
+    }
 
-    @SerializedName("strMealThumb")
-    var strMealThumb: String? = null
+    fun getDataRecipe(): DataRecipe {
+        return DataRecipe(
+            recipeId = id,
+            name = name,
+            category = category,
+            area = area,
+            ingredients = ingredients,
+            instructions = instructions,
+            imageUrl = imageUrl
+        )
+    }
 
-    @SerializedName("strTags")
-    var strTags: String? = null
-
-    @SerializedName("strYoutube")
-    var strYoutube: String? = null
-
-    @SerializedName("strIngredient1")
-    var strIngredient1: String? = null
-
-    @SerializedName("strIngredient2")
-    var strIngredient2: String? = null
-
-    @SerializedName("strIngredient3")
-    var strIngredient3: String? = null
-
-    @SerializedName("strIngredient4")
-    var strIngredient4: String? = null
-
-    @SerializedName("strIngredient5")
-    var strIngredient5: String? = null
-
-    @SerializedName("strIngredient6")
-    var strIngredient6: String? = null
-
-    @SerializedName("strIngredient7")
-    var strIngredient7: String? = null
-
-    @SerializedName("strIngredient8")
-    var strIngredient8: String? = null
-
-    @SerializedName("strIngredient9")
-    var strIngredient9: String? = null
-
-    @SerializedName("strIngredient10")
-    var strIngredient10: String? = null
-
-    @SerializedName("strIngredient11")
-    var strIngredient11: String? = null
-
-    @SerializedName("strIngredient12")
-    var strIngredient12: String? = null
-
-    @SerializedName("strIngredient13")
-    var strIngredient13: String? = null
-
-    @SerializedName("strIngredient14")
-    var strIngredient14: String? = null
-
-    @SerializedName("strIngredient15")
-    var strIngredient15: String? = null
-
-    @SerializedName("strIngredient16")
-    var strIngredient16: String? = null
-
-    @SerializedName("strIngredient17")
-    var strIngredient17: String? = null
-
-    @SerializedName("strIngredient18")
-    var strIngredient18: String? = null
-
-    @SerializedName("strIngredient19")
-    var strIngredient19: String? = null
-
-    @SerializedName("strIngredient20")
-    var strIngredient20: String? = null
-
-    @SerializedName("strMeasure1")
-    var strMeasure1: String? = null
-
-    @SerializedName("strMeasure2")
-    var strMeasure2: String? = null
-
-    @SerializedName("strMeasure3")
-    var strMeasure3: String? = null
-
-    @SerializedName("strMeasure4")
-    var strMeasure4: String? = null
-
-    @SerializedName("strMeasure5")
-    var strMeasure5: String? = null
-
-    @SerializedName("strMeasure6")
-    var strMeasure6: String? = null
-
-    @SerializedName("strMeasure7")
-    var strMeasure7: String? = null
-
-    @SerializedName("strMeasure8")
-    var strMeasure8: String? = null
-
-    @SerializedName("strMeasure9")
-    var strMeasure9: String? = null
-
-    @SerializedName("strMeasure10")
-    var strMeasure10: String? = null
-
-    @SerializedName("strMeasure11")
-    var strMeasure11: String? = null
-
-    @SerializedName("strMeasure12")
-    var strMeasure12: String? = null
-
-    @SerializedName("strMeasure13")
-    var strMeasure13: String? = null
-
-    @SerializedName("strMeasure14")
-    var strMeasure14: String? = null
-
-    @SerializedName("strMeasure15")
-    var strMeasure15: String? = null
-
-    @SerializedName("strMeasure16")
-    var strMeasure16: String? = null
-
-    @SerializedName("strMeasure17")
-    var strMeasure17: String? = null
-
-    @SerializedName("strMeasure18")
-    var strMeasure18: String? = null
-
-    @SerializedName("strMeasure19")
-    var strMeasure19: String? = null
-
-    @SerializedName("strMeasure20")
-    var strMeasure20: String? = null
-
-    @SerializedName("strSource")
-    var strSource: String? = null
-
-    @SerializedName("strImageSource")
-    var strImageSource: String? = null
-
-    @SerializedName("strCreativeCommonsConfirmed")
-    var strCreativeCommonsConfirmed: String? = null
-
-    @SerializedName("dateModified")
-    var dateModified: String? = null
+    var id = ""
+    var name = ""
+    var category = ""
+    var area = ""
+    var ingredients: MutableList<String> = mutableListOf()
+    var instructions: MutableList<String> = mutableListOf()
+    var imageUrl = ""
 }

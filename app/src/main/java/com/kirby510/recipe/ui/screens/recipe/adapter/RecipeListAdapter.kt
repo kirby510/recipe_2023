@@ -2,12 +2,17 @@ package com.kirby510.recipe.ui.screens.recipe.adapter
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.util.TypedValue
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.kirby510.recipe.domain.model.Recipe
+import com.kirby510.recipe.R
 import com.kirby510.recipe.databinding.ItemRecipeListBinding
+import com.kirby510.recipe.domain.model.Recipe
+
 
 class RecipeListAdapter(private var mContext: Context, private var recipeList: MutableList<Recipe>, var listener: OnItemClickListener? = null) : RecyclerView.Adapter<RecipeListAdapter.ItemViewHolder>() {
     inner class ItemViewHolder(itemBinding: ItemRecipeListBinding) : RecyclerView.ViewHolder(itemBinding.root) {
@@ -15,6 +20,7 @@ class RecipeListAdapter(private var mContext: Context, private var recipeList: M
         var ivMeal = itemBinding.ivMeal
         var tvMeal = itemBinding.tvMeal
         var tvMealCategory = itemBinding.tvMealCategory
+        var tvDivider = itemBinding.tvDivider
         var tvMealArea = itemBinding.tvMealArea
     }
 
@@ -30,13 +36,41 @@ class RecipeListAdapter(private var mContext: Context, private var recipeList: M
             listener?.onItemClick(recipe)
         }
 
+        holder.cvMeal.setOnLongClickListener {
+            listener?.onItemLongClick(it, recipe)
+
+            true
+        }
+
         Glide.with(mContext)
-            .load(recipe.strMealThumb)
+            .load(recipe.imageUrl)
             .into(holder.ivMeal)
 
-        holder.tvMeal.text = recipe.strMeal
-        holder.tvMealCategory.text = recipe.strCategory
-        holder.tvMealArea.text = recipe.strArea
+        holder.tvMeal.text = recipe.name
+        holder.tvMealCategory.text = recipe.category
+        holder.tvMealArea.text = recipe.area
+
+        if (recipe.imageUrl.isNotEmpty()) {
+            holder.tvMeal.setTextColor(ContextCompat.getColor(mContext, R.color.white))
+            holder.tvMealCategory.setTextColor(ContextCompat.getColor(mContext, R.color.white))
+            holder.tvDivider.setTextColor(ContextCompat.getColor(mContext, R.color.white))
+            holder.tvMealArea.setTextColor(ContextCompat.getColor(mContext, R.color.white))
+        } else {
+            val typedValue = TypedValue()
+            mContext.theme.resolveAttribute(android.R.attr.textColorPrimary, typedValue, true)
+            val colorRes = typedValue.run {
+                if (resourceId != 0) {
+                    resourceId
+                } else {
+                    data
+                }
+            }
+
+            holder.tvMeal.setTextColor(ContextCompat.getColor(mContext, colorRes))
+            holder.tvMealCategory.setTextColor(ContextCompat.getColor(mContext, colorRes))
+            holder.tvDivider.setTextColor(ContextCompat.getColor(mContext, colorRes))
+            holder.tvMealArea.setTextColor(ContextCompat.getColor(mContext, colorRes))
+        }
     }
 
     override fun getItemCount(): Int {
@@ -45,5 +79,7 @@ class RecipeListAdapter(private var mContext: Context, private var recipeList: M
 
     interface OnItemClickListener {
         fun onItemClick(recipe: Recipe)
+
+        fun onItemLongClick(view: View, recipe: Recipe)
     }
 }

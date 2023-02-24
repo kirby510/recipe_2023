@@ -2,7 +2,7 @@ package com.kirby510.recipe.domain.model
 
 import com.google.gson.annotations.SerializedName
 
-class RecipeList {
+class RecipeListResponse {
     @SerializedName("meals")
-    var meals: MutableList<Recipe>? = null
+    var meals: MutableList<RecipeResponse>? = null
 }

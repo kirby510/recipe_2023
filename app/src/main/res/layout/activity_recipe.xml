@@ -44,7 +44,7 @@
         </com.google.android.material.appbar.AppBarLayout>
 
         <androidx.core.widget.NestedScrollView
-            android:id="@+id/nestedScrollView"
+            android:id="@+id/nsv_recipe"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:layout_behavior="@string/appbar_scrolling_view_behavior">
@@ -58,7 +58,6 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:text="@string/ingredients" />
@@ -66,14 +65,12 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_meal_ingredients"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black" />
+                    android:layout_height="wrap_content" />
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
-                    android:textColor="@color/black"
                     android:textStyle="bold"
                     android:textSize="20sp"
                     android:text="@string/instructions" />
@@ -81,8 +78,7 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tv_meal_instructions"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textColor="@color/black" />
+                    android:layout_height="wrap_content" />
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
