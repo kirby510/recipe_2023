@@ -2,6 +2,7 @@ package com.kirby510.recipe.ui.screens.recipe
 
 import android.os.Build
 import android.os.Bundle
+import androidx.activity.OnBackPressedCallback
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
@@ -44,11 +45,19 @@ class RecipeActivity : AppCompatActivity() {
         loadView()
     }
 
+    override fun onSupportNavigateUp(): Boolean {
+        onBackPressedDispatcher.onBackPressed()
+
+        return super.onSupportNavigateUp()
+    }
+
     fun loadView() {
         Glide.with(this)
             .load(viewmodel.recipe?.imageUrl)
             .into(binding.ivMeal)
 
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        supportActionBar?.setDisplayShowHomeEnabled(true)
         supportActionBar?.title = viewmodel.recipe?.name
         supportActionBar?.subtitle = viewmodel.recipe?.category + " | " + viewmodel.recipe?.area
 

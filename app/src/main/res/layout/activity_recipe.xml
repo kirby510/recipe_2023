@@ -23,23 +23,29 @@
                 android:id="@+id/ctl_toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap"
-                app:titleEnabled="true">
+                app:titleEnabled="true"
+                app:contentScrim="?attr/colorPrimary"
+                app:collapsedTitleTextColor="@color/white"
+                app:expandedTitleTextColor="@color/white"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed|snap">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/iv_meal"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:scaleType="centerCrop"
-                    app:layout_collapseMode="parallax" />
+                    app:layout_collapseMode="parallax"
+                    app:layout_collapseParallaxMultiplier="0" />
 
                 <com.google.android.material.appbar.MaterialToolbar
                     android:id="@+id/mt_toolbar"
                     android:layout_width="match_parent"
                     android:layout_height="?attr/actionBarSize"
-                    app:layout_collapseMode="pin"
+                    android:background="@android:color/transparent"
                     app:subtitleTextColor="@color/white"
-                    app:titleTextColor="@color/white" />
+                    app:titleTextColor="@color/white"
+                    app:layout_collapseMode="pin"
+                    app:layout_scrollFlags="scroll|exitUntilCollapsed|snap" />
             </com.google.android.material.appbar.CollapsingToolbarLayout>
         </com.google.android.material.appbar.AppBarLayout>
 
