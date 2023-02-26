@@ -13,8 +13,7 @@ import com.kirby510.recipe.R
 import com.kirby510.recipe.databinding.ItemRecipeListBinding
 import com.kirby510.recipe.domain.model.Recipe
 
-
-class RecipeListAdapter(private var mContext: Context, private var recipeList: MutableList<Recipe>, var listener: OnItemClickListener? = null) : RecyclerView.Adapter<RecipeListAdapter.ItemViewHolder>() {
+class RecipeListAdapter(private var mContext: Context, private var recipeList: MutableList<Recipe> = mutableListOf(), var listener: OnItemClickListener? = null) : RecyclerView.Adapter<RecipeListAdapter.ItemViewHolder>() {
     inner class ItemViewHolder(itemBinding: ItemRecipeListBinding) : RecyclerView.ViewHolder(itemBinding.root) {
         var cvMeal = itemBinding.cvMeal
         var ivMeal = itemBinding.ivMeal
